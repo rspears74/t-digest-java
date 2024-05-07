@@ -119,6 +119,14 @@ public class MergingDigest extends AbstractTDigest {
         this(compression, -1);
     }
 
+    @SuppressWarnings("WeakerAccess")
+    public MergingDigest(double compression, double[] mean, double[] weight) {
+        MergingDigest digest = this(compression, -1);
+        digest.mean = mean;
+        digest.weight = weight;
+        digest.lastUsedCell = mean.length;
+    }
+
     /**
      * If you know the size of the temporary buffer for incoming points, you can use this entry point.
      *
