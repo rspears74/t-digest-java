@@ -74,9 +74,9 @@ public class MergingDigest extends AbstractTDigest {
     private double totalWeight = 0;
 
     // number of points that have been added to each merged centroid
-    private final double[] weight;
+    private double[] weight;
     // mean of points added to each merged centroid
-    private final double[] mean;
+    private double[] mean;
 
     // history of all data added to centroids (for testing purposes)
     private List<List<Double>> data = null;
@@ -121,10 +121,13 @@ public class MergingDigest extends AbstractTDigest {
 
     @SuppressWarnings("WeakerAccess")
     public MergingDigest(double compression, double[] mean, double[] weight) {
-        MergingDigest digest = this(compression, -1);
-        digest.mean = mean;
-        digest.weight = weight;
-        digest.lastUsedCell = mean.length;
+        this(compression, -1);
+        assert mean.length == weight.length;
+        for (int i = 0; i < mean.length; i++) {
+            this.mean[i] = mean[i];
+            this.weight[i] = weight[i];
+        }
+        this.lastUsedCell = mean.length;
     }
 
     /**
