@@ -124,10 +124,8 @@ public class MergingDigest extends AbstractTDigest {
         this(compression, -1);
         assert mean.length == weight.length;
         for (int i = 0; i < mean.length; i++) {
-            this.mean[i] = mean[i];
-            this.weight[i] = weight[i];
+            this.add(mean[i], weight[i]);
         }
-        this.lastUsedCell = mean.length;
     }
 
     /**
